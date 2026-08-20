@@ -8,7 +8,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="assets/imagens/icon.png" />
+
     <style>
+        /* ===== VARIÁVEIS ===== */
+        :root {
+            --bg-primary: #fff7e7;
+            --bg-secondary: #ffffff;
+            --bg-section: #f0ebe2;
+            --bg-footer: #e6ddd0;
+            --text-primary: #3d2c1e;
+            --text-secondary: #5d4d3e;
+            --text-light: #6b5a4a;
+            --color-green: #5a7a5a;
+            --color-brown: #8b6b4d;
+            --color-brown-hover: #6f523a;
+            --color-green-hover: #456545;
+            --border-color: #e6ddd0;
+            --shadow-color: rgba(90, 70, 50, 0.08);
+            --shadow-hover: rgba(90, 70, 50, 0.15);
+            --form-bg: #ffffff;
+            --form-shadow: rgba(90, 70, 50, 0.06);
+            --input-border: #d6cdbf;
+            --btn-text: #ffffff;
+        }
+
+        /* ===== MODO ESCURO (automático) ===== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1e1a16;
+                --bg-secondary: #2a2520;
+                --bg-section: #332d26;
+                --bg-footer: #1e1a16;
+                --text-primary: #f0e8dc;
+                --text-secondary: #c9bdb0;
+                --text-light: #b0a292;
+                --color-green: #7aaa7a;
+                --color-brown: #b08a6a;
+                --color-brown-hover: #cfa07a;
+                --color-green-hover: #8fbf8f;
+                --border-color: #3d352e;
+                --shadow-color: rgba(0, 0, 0, 0.3);
+                --shadow-hover: rgba(0, 0, 0, 0.5);
+                --form-bg: #2a2520;
+                --form-shadow: rgba(0, 0, 0, 0.3);
+                --input-border: #5a4d3e;
+                --btn-text: #1e1a16;
+            }
+        }
+
         /* ===== RESET ===== */
         * {
             margin: 0;
@@ -18,28 +65,26 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: #fff7e7;
-            color: #3d2c1e;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.7;
         }
 
+        /* ===== CONTAINER FULL-WIDTH ===== */
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
+            width: 100%;
+            padding: 0 5%; /* espaçamento lateral fluido */
+            max-width: 100%;
         }
 
         /* ===== HEADER ===== */
         header {
-            background: #ffffff;
-            box-shadow: 0 2px 12px rgba(90, 70, 50, 0.08);
-            padding: 18px 0;
+            background: var(--bg-secondary);
+            box-shadow: 0 2px 12px var(--shadow-color);
+            padding: 18px 5%;
             position: sticky;
             top: 0;
             z-index: 10;
-        }
-
-        header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -53,7 +98,7 @@
             gap: 8px;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #5a7a5a;
+            color: var(--color-green);
             text-decoration: none;
         }
 
@@ -64,26 +109,26 @@
         }
 
         .logo span {
-            color: #8b6b4d;
+            color: var(--color-brown);
         }
 
         nav a {
             margin-left: 28px;
             text-decoration: none;
-            color: #3d2c1e;
+            color: var(--text-primary);
             font-weight: 600;
             font-size: 1rem;
             transition: color 0.2s;
         }
 
         nav a:hover {
-            color: #8b6b4d;
+            color: var(--color-brown);
         }
 
         /* ===== HERO ===== */
         .hero {
-            background: #fff7e7;
-            padding: 60px 0 70px;
+            background: var(--bg-primary);
+            padding: 60px 5% 70px;
         }
 
         .hero-grid {
@@ -104,8 +149,8 @@
             height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 8px 30px rgba(90, 70, 50, 0.15);
-            border: 6px solid #ffffff;
+            box-shadow: 0 8px 30px var(--shadow-hover);
+            border: 6px solid var(--bg-secondary);
         }
 
         .hero-texto {
@@ -115,39 +160,40 @@
         .hero-texto h1 {
             font-size: 2.8rem;
             font-weight: 300;
-            color: #3d2c1e;
+            color: var(--text-primary);
             margin-bottom: 4px;
         }
 
         .hero-texto h1 strong {
             font-weight: 700;
-            color: #5a7a5a;
+            color: var(--color-green);
         }
 
         .hero-texto .subtitulo {
             font-size: 1.2rem;
-            color: #6b5a4a;
+            color: var(--text-light);
             margin-bottom: 12px;
         }
 
         .hero-texto .frase-destaque {
             font-size: 1.3rem;
-            color: #5a7a5a;
+            color: var(--color-green);
             font-weight: 600;
             font-style: italic;
             margin: 12px 0 8px;
         }
 
         .hero-texto p {
-            color: #5d4d3e;
+            color: var(--text-secondary);
             max-width: 500px;
             margin-bottom: 20px;
         }
 
+        /* ===== BOTÕES ===== */
         .btn {
             display: inline-block;
-            background: #8b6b4d;
-            color: #fff;
+            background: var(--color-brown);
+            color: var(--btn-text);
             padding: 14px 44px;
             border-radius: 40px;
             text-decoration: none;
@@ -159,22 +205,22 @@
         }
 
         .btn:hover {
-            background: #6f523a;
+            background: var(--color-brown-hover);
             transform: translateY(-2px);
         }
 
         .btn-verde {
-            background: #5a7a5a;
+            background: var(--color-green);
         }
 
         .btn-verde:hover {
-            background: #456545;
+            background: var(--color-green-hover);
         }
 
         /* ===== SEÇÕES ===== */
         section {
-            padding: 70px 0;
-            border-bottom: 1px solid #e6ddd0;
+            padding: 70px 5%;
+            border-bottom: 1px solid var(--border-color);
         }
 
         section:last-of-type {
@@ -184,7 +230,7 @@
         h2 {
             font-size: 2rem;
             font-weight: 300;
-            color: #5a7a5a;
+            color: var(--color-green);
             text-align: center;
             margin-bottom: 12px;
         }
@@ -194,7 +240,7 @@
             display: block;
             width: 60px;
             height: 3px;
-            background: #8b6b4d;
+            background: var(--color-brown);
             margin: 10px auto 0;
             border-radius: 4px;
         }
@@ -203,7 +249,7 @@
             text-align: center;
             max-width: 720px;
             margin: 0 auto 20px;
-            color: #4d3d2e;
+            color: var(--text-secondary);
         }
 
         /* ===== SOBRE ===== */
@@ -232,8 +278,8 @@
             width: 200px;
             height: 200px;
             object-fit: cover;
-            box-shadow: 0 8px 24px rgba(90, 70, 50, 0.15);
-            border: 4px solid #fff7e7;
+            box-shadow: 0 8px 24px var(--shadow-hover);
+            border: 4px solid var(--bg-secondary);
         }
 
         .sobre-grid .texto p {
@@ -241,22 +287,22 @@
         }
 
         .sobre-grid .texto strong {
-            color: #5a7a5a;
+            color: var(--color-green);
         }
 
         .crp {
             display: inline-block;
-            background: #e6ddd0;
+            background: var(--bg-section);
             padding: 4px 16px;
             border-radius: 30px;
             font-size: 0.9rem;
-            color: #3d2c1e;
+            color: var(--text-primary);
             margin-top: 6px;
         }
 
         /* ===== FRED ===== */
         .fred-box {
-            background: #f0ebe2;
+            background: var(--bg-section);
             border-radius: 20px;
             padding: 24px 30px;
             margin-top: 24px;
@@ -264,7 +310,7 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 24px;
-            border-left: 5px solid #8b6b4d;
+            border-left: 5px solid var(--color-brown);
         }
 
         .fred-foto {
@@ -277,8 +323,8 @@
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #ffffff;
-            box-shadow: 0 4px 12px rgba(90, 70, 50, 0.15);
+            border: 4px solid var(--bg-secondary);
+            box-shadow: 0 4px 12px var(--shadow-hover);
         }
 
         .fred-texto {
@@ -298,37 +344,37 @@
         }
 
         .servico-item {
-            background: #ffffff;
+            background: var(--bg-secondary);
             padding: 28px 18px;
             border-radius: 16px;
             text-align: center;
-            box-shadow: 0 4px 16px rgba(90, 70, 50, 0.06);
+            box-shadow: 0 4px 16px var(--shadow-color);
             transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #f0ebe2;
+            border: 1px solid var(--border-color);
         }
 
         .servico-item:hover {
             transform: translateY(-6px);
-            box-shadow: 0 8px 28px rgba(90, 70, 50, 0.10);
+            box-shadow: 0 8px 28px var(--shadow-hover);
         }
 
         .servico-item .icone {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #5a7a5a;
+            color: var(--color-green);
             margin-bottom: 8px;
             letter-spacing: 1px;
         }
 
         .servico-item h3 {
-            color: #5a7a5a;
+            color: var(--color-green);
             margin-bottom: 6px;
             font-size: 1.1rem;
         }
 
         .servico-item p {
             font-size: 0.95rem;
-            color: #5d4d3e;
+            color: var(--text-secondary);
         }
 
         /* ===== RECURSOS ===== */
@@ -341,17 +387,17 @@
         }
 
         .recurso-tag {
-            background: #ffffff;
-            border: 1px solid #d6cdbf;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             padding: 10px 24px;
             border-radius: 40px;
             font-weight: 600;
-            color: #5a7a5a;
+            color: var(--color-green);
             font-size: 0.95rem;
-            box-shadow: 0 2px 8px rgba(90, 70, 50, 0.04);
+            box-shadow: 0 2px 8px var(--shadow-color);
         }
 
-        /* ===== CONTATO (com foto e Google Forms melhorado) ===== */
+        /* ===== CONTATO ===== */
         .contato-grid {
             display: flex;
             flex-wrap: wrap;
@@ -393,11 +439,10 @@
             height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 8px 30px rgba(90, 70, 50, 0.15);
-            border: 6px solid #ffffff;
+            box-shadow: 0 8px 30px var(--shadow-hover);
+            border: 6px solid var(--bg-secondary);
         }
 
-        /* ===== INFORMAÇÕES DE CONTATO ===== */
         .contato-info {
             display: flex;
             flex-wrap: wrap;
@@ -407,20 +452,20 @@
         }
 
         .contato-info a {
-            color: #3d2c1e;
+            color: var(--text-primary);
             text-decoration: none;
             border-bottom: 2px solid transparent;
             transition: border-color 0.2s, color 0.2s;
         }
 
         .contato-info a:hover {
-            border-color: #8b6b4d;
-            color: #8b6b4d;
+            border-color: var(--color-brown);
+            color: var(--color-brown);
         }
 
         .contato-info .label {
             font-weight: 300;
-            color: #7a6a5a;
+            color: var(--text-light);
             display: block;
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -428,44 +473,46 @@
         }
 
         .horario {
-            color: #5d4d3e;
+            color: var(--text-secondary);
             font-size: 1rem;
         }
 
         .horario strong {
-            color: #5a7a5a;
+            color: var(--color-green);
         }
 
-        /* ===== WRAPPER DO GOOGLE FORMS (MELHORIAS) ===== */
+        /* ===== GOOGLE FORMS WRAPPER ===== */
         .form-wrapper {
-            background: #ffffff;
+            background: var(--form-bg);
             border-radius: 20px;
-            padding: 10px; /* respiro interno */
-            box-shadow: 0 4px 20px rgba(90, 70, 50, 0.06);
+            padding: 10px;
+            box-shadow: 0 4px 20px var(--form-shadow);
             margin-top: 20px;
             transition: box-shadow 0.3s;
+            border: 1px solid var(--border-color);
         }
 
         .form-wrapper:hover {
-            box-shadow: 0 8px 30px rgba(90, 70, 50, 0.10);
+            box-shadow: 0 8px 30px var(--shadow-hover);
         }
 
         .form-wrapper iframe {
             display: block;
             width: 100%;
-            height: 650px; /* altura ajustada para evitar scroll duplo */
+            height: 650px;
             border: none;
             border-radius: 12px;
-            background: #ffffff;
+            background: var(--form-bg);
         }
 
         /* ===== RODAPÉ ===== */
         footer {
-            background: #e6ddd0;
-            padding: 36px 0 28px;
+            background: var(--bg-footer);
+            padding: 36px 5% 28px;
             text-align: center;
-            color: #4d3d2e;
+            color: var(--text-secondary);
             font-size: 0.95rem;
+            border-top: 1px solid var(--border-color);
         }
 
         footer .icone-rodape {
@@ -476,13 +523,13 @@
         }
 
         footer a {
-            color: #5a7a5a;
+            color: var(--color-green);
             text-decoration: none;
             font-weight: 600;
         }
 
         footer a:hover {
-            color: #3d6b3d;
+            color: var(--color-green-hover);
         }
 
         footer .links-rodape {
@@ -535,9 +582,10 @@
         }
 
         @media (max-width: 700px) {
-            header .container {
+            header {
                 flex-direction: column;
                 gap: 8px;
+                padding: 18px 5%;
             }
             nav a {
                 margin: 0 12px;
@@ -574,7 +622,7 @@
 
 <!-- ===== HEADER ===== -->
 <header>
-    <div class="container">
+    <div class="container" style="padding:0;">
         <a href="#" class="logo">
             <img src="assets/imagens/icon.png" alt="Ícone" class="icone-logo" />
             Karol<span>.</span>
@@ -739,7 +787,7 @@
                     </div>
                     <div>
                         <span class="label">Endereço</span>
-                        <span style="color: #3d2c1e;">Rua João Vogelsanger, 346, Joinville-SC</span>
+                        <span style="color: var(--text-primary);">Rua João Vogelsanger, 346, Joinville-SC</span>
                     </div>
                 </div>
 
@@ -747,11 +795,11 @@
                     Segunda a sexta — das 8h às 18h
                 </div>
 
-                <!-- Google Forms – com wrapper para melhor aparência -->
+                <!-- Google Forms -->
                 <div class="form-wrapper">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD9GERH22ddtyBqJzsWCdvex12HenHq8RSvgsGfQD0ZYKmFQ/viewform?embedded=true" 
                             width="100%" 
-                            height="650" 
+                            height="800" 
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0">
@@ -768,7 +816,7 @@
 
 <!-- ===== RODAPÉ ===== -->
 <footer>
-    <div class="container">
+    <div class="container" style="padding:0;">
         <p>
             <img src="assets/imagens/icon.png" alt="Ícone" class="icone-rodape" />
             &copy; 2026 Karolayne – Psicóloga Clínica | CRP 12/28342
@@ -776,7 +824,7 @@
         <p class="links-rodape">
             <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank">Instagram</a>
         </p>
-        <p style="margin-top: 14px; font-size: 0.8rem; color: #7a6a5a;">
+        <p style="margin-top: 14px; font-size: 0.8rem; color: var(--text-light);">
             Este site não substitui uma consulta presencial. Em caso de emergência, procure o CVV (188) ou um serviço de urgência.
         </p>
     </div>

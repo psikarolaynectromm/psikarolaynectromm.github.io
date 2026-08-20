@@ -91,7 +91,7 @@
             flex-wrap: wrap;
             gap: 12px;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
@@ -101,26 +101,32 @@
             color: var(--color-green);
             text-decoration: none;
         }
-
+        
         .logo .icone-logo {
             width: 32px;
             height: 32px;
             display: inline-block;
         }
-
+        
         .logo span {
             color: var(--color-brown);
         }
-
+        
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 20px;
+        }
+        
         nav a {
-            margin-left: 28px;
             text-decoration: none;
             color: var(--text-primary);
             font-weight: 600;
             font-size: 1rem;
             transition: color 0.2s;
         }
-
+        
         nav a:hover {
             color: var(--color-brown);
         }
@@ -594,11 +600,14 @@
         @media (max-width: 700px) {
             header {
                 flex-direction: column;
-                gap: 8px;
+                gap: 12px;
                 padding: 18px 5%;
             }
+            nav {
+                justify-content: center;
+            }
             nav a {
-                margin: 0 12px;
+                margin: 0 8px;
                 font-size: 0.95rem;
             }
             .sobre-grid .foto {
@@ -628,18 +637,16 @@
 
 <!-- ===== HEADER ===== -->
 <header>
-    <div class="container" style="padding:0;">
-        <a href="#" class="logo">
-            <img src="assets/imagens/icon.png" alt="Ícone" class="icone-logo" />
-            Karol<span>.</span>
-        </a>
-        <nav>
-            <a href="#sobre">Sobre</a>
-            <a href="#servicos">Serviços</a>
-            <a href="#recursos">Recursos</a>
-            <a href="#contato">Contato</a>
-        </nav>
-    </div>
+    <a href="#" class="logo">
+        <img src="assets/imagens/icon.png" alt="Ícone" class="icone-logo" />
+        Karolayne<span>.</span>
+    </a>
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#contato">Contato</a>
+    </nav>
 </header>
 
 <!-- ===== HERO ===== -->

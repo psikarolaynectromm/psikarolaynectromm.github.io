@@ -351,11 +351,11 @@
             box-shadow: 0 2px 8px rgba(90, 70, 50, 0.04);
         }
 
-        /* ===== CONTATO (com foto) ===== */
+        /* ===== CONTATO (com foto e Google Forms) ===== */
         .contato-grid {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
+            align-items: flex-start;
             gap: 50px;
             margin-top: 20px;
         }
@@ -380,11 +380,6 @@
 
         .contato-texto .horario {
             text-align: left;
-        }
-
-        .contato-texto form {
-            max-width: 100%;
-            margin: 36px 0 0;
         }
 
         .contato-imagem {
@@ -441,36 +436,15 @@
             color: #5a7a5a;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        form input,
-        form textarea {
-            padding: 14px 20px;
-            border: 1px solid #d6cdbf;
-            border-radius: 30px;
-            font-family: inherit;
-            font-size: 1rem;
+        /* Google Forms iframe */
+        .contato-texto iframe {
+            width: 100%;
+            height: 691px;
+            border: none;
+            border-radius: 16px;
             background: #ffffff;
-            transition: border-color 0.2s;
-            outline: none;
-        }
-
-        form input:focus,
-        form textarea:focus {
-            border-color: #8b6b4d;
-        }
-
-        form textarea {
-            border-radius: 20px;
-            resize: vertical;
-        }
-
-        form button {
-            align-self: flex-start;
+            box-shadow: 0 4px 16px rgba(90, 70, 50, 0.06);
+            margin-top: 20px;
         }
 
         /* ===== RODAPÉ ===== */
@@ -543,8 +517,8 @@
             .contato-texto .contato-info {
                 justify-content: center;
             }
-            .contato-texto form button {
-                align-self: center;
+            .contato-texto iframe {
+                height: 600px;
             }
         }
 
@@ -577,6 +551,9 @@
             .btn {
                 padding: 12px 32px;
                 font-size: 1rem;
+            }
+            .contato-texto iframe {
+                height: 500px;
             }
         }
     </style>
@@ -722,7 +699,7 @@
     </div>
 </section>
 
-<!-- ===== CONTATO (com foto) ===== -->
+<!-- ===== CONTATO (com foto e Google Forms) ===== -->
 <section id="contato">
     <div class="container">
         <div class="contato-grid">
@@ -730,12 +707,11 @@
                 <h2>Entre em contato</h2>
                 <p class="texto-central">
                     Se você se identificou com a minha forma de trabalhar e com a abordagem que utilizo,
-                    e gostaria de agendar uma sessão, é só clicar no botão abaixo ou falar comigo por
-                    um dos canais:
+                    e gostaria de agendar uma sessão, é só clicar no botão abaixo ou preencher o formulário.
                 </p>
 
                 <div style="margin: 20px 0 10px;">
-                    <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-verde">
+                    <a href="https://wa.me/5547988732736" target="_blank" class="btn btn-verde">
                         Agendar pelo WhatsApp
                     </a>
                 </div>
@@ -759,12 +735,15 @@
                     Segunda a sexta — das 8h às 18h
                 </div>
 
-                <form>
-                    <input type="text" placeholder="Seu nome" required />
-                    <input type="email" placeholder="Seu melhor e-mail" required />
-                    <textarea rows="4" placeholder="Como posso ajudá-lo(a)?"></textarea>
-                    <button type="submit" class="btn">Enviar mensagem</button>
-                </form>
+                <!-- Google Forms -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD9GERH22ddtyBqJzsWCdvex12HenHq8RSvgsGfQD0ZYKmFQ/viewform?embedded=true" 
+                        width="100%" 
+                        height="691" 
+                        frameborder="0" 
+                        marginheight="0" 
+                        marginwidth="0">
+                    Carregando…
+                </iframe>
             </div>
             <div class="contato-imagem">
                 <img src="assets/imagens/karol_3.jpg" alt="Karolayne" />

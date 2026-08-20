@@ -35,24 +35,24 @@
         /* ===== MODO ESCURO (automático) ===== */
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-primary: #1e1a16;
-                --bg-secondary: #2a2520;
-                --bg-section: #332d26;
-                --bg-footer: #1e1a16;
-                --text-primary: #f0e8dc;
-                --text-secondary: #c9bdb0;
-                --text-light: #b0a292;
-                --color-green: #7aaa7a;
-                --color-brown: #b08a6a;
-                --color-brown-hover: #cfa07a;
-                --color-green-hover: #8fbf8f;
-                --border-color: #3d352e;
-                --shadow-color: rgba(0, 0, 0, 0.3);
-                --shadow-hover: rgba(0, 0, 0, 0.5);
-                --form-bg: #2a2520;
+                --bg-primary: #1e1813;
+                --bg-secondary: #2a231c;
+                --bg-section: #332b23;
+                --bg-footer: #1e1813;
+                --text-primary: #f0e6d8;
+                --text-secondary: #c9bcad;
+                --text-light: #b0a08e;
+                --color-green: #8aba8a;
+                --color-brown: #c49a78;
+                --color-brown-hover: #d8ae8a;
+                --color-green-hover: #a0d0a0;
+                --border-color: #3d342b;
+                --shadow-color: rgba(0, 0, 0, 0.4);
+                --shadow-hover: rgba(0, 0, 0, 0.6);
+                --form-bg: #2a231c;
                 --form-shadow: rgba(0, 0, 0, 0.3);
                 --input-border: #5a4d3e;
-                --btn-text: #1e1a16;
+                --btn-text: #1e1813;
             }
         }
 
@@ -73,7 +73,7 @@
         /* ===== CONTAINER FULL-WIDTH ===== */
         .container {
             width: 100%;
-            padding: 0 5%; /* espaçamento lateral fluido */
+            padding: 0 5%;
             max-width: 100%;
         }
 
@@ -139,14 +139,14 @@
         }
 
         .hero-imagem {
-            flex: 1 1 280px;
+            flex: 1 1 320px;
             text-align: center;
         }
 
         .hero-imagem img {
             max-width: 100%;
-            width: 280px;
-            height: 280px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 8px 30px var(--shadow-hover);
@@ -267,7 +267,7 @@
         }
 
         .sobre-grid .foto {
-            flex: 1 1 200px;
+            flex: 1 1 320px;
             text-align: center;
             order: 2;
         }
@@ -275,8 +275,8 @@
         .sobre-grid .foto img {
             max-width: 100%;
             border-radius: 50%;
-            width: 200px;
-            height: 200px;
+            width: 320px;
+            height: 320px;
             object-fit: cover;
             box-shadow: 0 8px 24px var(--shadow-hover);
             border: 4px solid var(--bg-secondary);
@@ -300,27 +300,26 @@
             margin-top: 6px;
         }
 
-        /* ===== FRED ===== */
+        /* ===== FRED (centralizado, foto acima do texto) ===== */
         .fred-box {
             background: var(--bg-section);
             border-radius: 20px;
-            padding: 24px 30px;
+            padding: 30px 24px;
             margin-top: 24px;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             align-items: center;
-            gap: 24px;
+            text-align: center;
             border-left: 5px solid var(--color-brown);
         }
 
         .fred-foto {
-            flex: 0 0 120px;
-            text-align: center;
+            margin-bottom: 16px;
         }
 
         .fred-foto img {
-            width: 120px;
-            height: 120px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--bg-secondary);
@@ -328,7 +327,7 @@
         }
 
         .fred-texto {
-            flex: 1;
+            max-width: 600px;
         }
 
         .fred-texto p {
@@ -429,14 +428,14 @@
         }
 
         .contato-imagem {
-            flex: 1 1 250px;
+            flex: 1 1 320px;
             text-align: center;
         }
 
         .contato-imagem img {
             max-width: 100%;
-            width: 280px;
-            height: 280px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 8px 30px var(--shadow-hover);
@@ -449,6 +448,7 @@
             gap: 28px 40px;
             margin: 20px 0;
             font-size: 1.1rem;
+            align-items: center;
         }
 
         .contato-info a {
@@ -481,6 +481,16 @@
             color: var(--color-green);
         }
 
+        /* Botão Instagram (estilo igual aos outros) */
+        .btn-instagram {
+            background: #d62976; /* cor oficial do Instagram */
+            color: #fff;
+        }
+
+        .btn-instagram:hover {
+            background: #b81a5f;
+        }
+
         /* ===== GOOGLE FORMS WRAPPER ===== */
         .form-wrapper {
             background: var(--form-bg);
@@ -499,7 +509,7 @@
         .form-wrapper iframe {
             display: block;
             width: 100%;
-            height: 800px;
+            height: 1000px;
             border: none;
             border-radius: 12px;
             background: var(--form-bg);
@@ -602,11 +612,7 @@
                 text-align: center;
             }
             .fred-box {
-                flex-direction: column;
-                text-align: center;
-            }
-            .fred-foto {
-                flex: 0 0 auto;
+                padding: 20px 16px;
             }
             .btn {
                 padding: 12px 32px;
@@ -694,7 +700,7 @@
             </div>
         </div>
 
-        <!-- Fred -->
+        <!-- Fred (centralizado, foto acima) -->
         <div class="fred-box">
             <div class="fred-foto">
                 <img src="assets/imagens/fred_1.jpg" alt="Fred, o salsicha" />
@@ -770,9 +776,12 @@
                     e gostaria de agendar uma sessão, é só clicar no botão abaixo ou preencher o formulário.
                 </p>
 
-                <div style="margin: 20px 0 10px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 10px;">
                     <a href="https://wa.me/5547988732736" target="_blank" class="btn btn-verde">
                         Agendar pelo WhatsApp
+                    </a>
+                    <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank" class="btn btn-instagram">
+                        Instagram
                     </a>
                 </div>
 
@@ -785,10 +794,6 @@
                         <span class="label">Telefone</span>
                         <a href="tel:+5547988732736">(47) 98873-2736</a>
                     </div>
-                    <div>
-                        <span class="label">Endereço</span>
-                        <span style="color: var(--text-primary);">Rua João Vogelsanger, 346, Joinville-SC</span>
-                    </div>
                 </div>
 
                 <div class="horario">
@@ -799,7 +804,7 @@
                 <div class="form-wrapper">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD9GERH22ddtyBqJzsWCdvex12HenHq8RSvgsGfQD0ZYKmFQ/viewform?embedded=true" 
                             width="100%" 
-                            height="800" 
+                            height="650" 
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0">

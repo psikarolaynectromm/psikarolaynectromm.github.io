@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Karolayne – Psicóloga Clínica</title>
+    <script>document.documentElement.classList.add('js-enabled');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -30,6 +31,8 @@
             --form-shadow: rgba(90, 70, 50, 0.06);
             --input-border: #d6cdbf;
             --btn-text: #ffffff;
+            --bg-header: #eaf0e6;
+            --bg-hero: #e3ecdf;
         }
 
         /* ===== MODO ESCURO (automático) ===== */
@@ -53,6 +56,8 @@
                 --form-shadow: rgba(0, 0, 0, 0.3);
                 --input-border: #5a4d3e;
                 --btn-text: #1e1813;
+                --bg-header: #1c231c;
+                --bg-hero: #202a20;
             }
         }
 
@@ -79,7 +84,7 @@
 
         /* ===== HEADER ===== */
         header {
-            background: var(--bg-secondary);
+            background: var(--bg-header);
             box-shadow: 0 2px 12px var(--shadow-color);
             padding: 18px 5%;
             position: sticky;
@@ -133,7 +138,7 @@
 
         /* ===== HERO ===== */
         .hero {
-            background: var(--bg-primary);
+            background: var(--bg-hero);
             padding: 60px 5% 70px;
         }
 
@@ -308,11 +313,8 @@
 
         /* ===== FRED (com linhas de chamada) ===== */
         .fred-box {
-            background: var(--bg-section);
-            border-radius: 20px;
-            padding: 40px 24px;
-            margin-top: 24px;
-            border-left: 5px solid var(--color-brown);
+            margin-top: 40px;
+            padding: 20px 24px;
         }
 
         .fred-visual {
@@ -696,6 +698,40 @@
                 height: 480px;
             }
         }
+        /* ===== ANIMAÇÕES DE ROLAGEM ===== */
+        /* Só escondem o conteúdo se o JavaScript confirmar que está ativo
+           (classe .js-enabled adicionada de forma síncrona no <head>).
+           Sem JS, o conteúdo permanece sempre visível normalmente. */
+        .js-enabled .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .js-enabled .reveal.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .js-enabled .reveal-img {
+            opacity: 0;
+            transform: scale(0.94);
+            transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .js-enabled .reveal-img.reveal-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js-enabled .reveal,
+            .js-enabled .reveal-img {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -719,19 +755,19 @@
     <div class="container">
         <div class="hero-grid">
             <div class="hero-imagem">
-                <img src="assets/imagens/karol_1.jpg" alt="Karolayne" />
+                <img class="reveal-img" src="assets/imagens/karol_1.jpg" alt="Karolayne" />
             </div>
             <div class="hero-texto">
-                <h1>Olá, sou <strong>Karolayne</strong></h1>
-                <p class="subtitulo">Psicóloga clínica · CRP 12/28342</p>
-                <p class="frase-destaque">
+                <h1 class="reveal" style="transition-delay:0.1s">Olá, sou <strong>Karolayne</strong></h1>
+                <p class="subtitulo reveal" style="transition-delay:0.2s">Psicóloga clínica · CRP 12/28342</p>
+                <p class="frase-destaque reveal" style="transition-delay:0.3s">
                     “Às vezes, tudo começa quando você se permite olhar para dentro.”
                 </p>
-                <p>
+                <p class="reveal" style="transition-delay:0.4s">
                     Entre o que você vive hoje e o que deseja viver, existe um caminho.<br />
                     Podemos construí-lo juntos.
                 </p>
-                <a href="#contato" class="btn">Vamos conversar?</a>
+                <a href="#contato" class="btn reveal" style="transition-delay:0.5s">Vamos conversar?</a>
             </div>
         </div>
     </div>
@@ -740,9 +776,9 @@
 <!-- ===== SOBRE ===== -->
 <section id="sobre">
     <div class="container">
-        <h2>Sobre a Karol</h2>
+        <h2 class="reveal">Sobre a Karol</h2>
         <div class="sobre-grid">
-            <div class="texto">
+            <div class="texto reveal">
                 <p>
                     <strong>Que bom ter você por aqui!</strong> Deixe eu me apresentar: meu nome é
                     <strong>Karolayne</strong>, sou psicóloga clínica, inscrita no CRP 12/28342,
@@ -768,30 +804,20 @@
                 <span class="crp">CRP 12/28342</span>
             </div>
             <div class="foto">
-                <img src="assets/imagens/karol_2.jpg" alt="Karolayne" />
+                <img class="reveal-img" src="assets/imagens/karol_2.jpg" alt="Karolayne" />
             </div>
         </div>
 
         <!-- Fred (com linhas de chamada) -->
-        <div class="fred-box">
+        <div class="fred-box reveal">
             <div class="fred-visual">
                 <svg class="fred-arrow-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="fredArrowLeft" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
-                            <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-brown)" />
-                        </marker>
-                        <marker id="fredArrowRight" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
-                            <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-brown)" />
-                        </marker>
-                    </defs>
-                    <!-- Seta esquerda: do texto até o topo-esquerda do círculo -->
+                    <!-- Linha fina esquerda: do texto até o topo-esquerda do círculo -->
                     <path d="M 260 90 C 320 90, 340 130, 355 170"
-                          stroke="var(--color-brown)" stroke-width="2.5" fill="none"
-                          marker-end="url(#fredArrowLeft)" />
-                    <!-- Seta direita: do fundo-direita do círculo até o texto -->
+                          stroke="var(--color-brown)" stroke-width="1" fill="none" opacity="0.5" />
+                    <!-- Linha fina direita: do fundo-direita do círculo até o texto -->
                     <path d="M 545 250 C 580 280, 610 270, 640 260"
-                          stroke="var(--color-brown)" stroke-width="2.5" fill="none"
-                          marker-end="url(#fredArrowRight)" />
+                          stroke="var(--color-brown)" stroke-width="1" fill="none" opacity="0.5" />
                 </svg>
 
                 <div class="fred-foto">
@@ -819,28 +845,28 @@
 <!-- ===== SERVIÇOS ===== -->
 <section id="servicos">
     <div class="container">
-        <h2>Como posso ajudar</h2>
-        <p class="texto-central">
+        <h2 class="reveal">Como posso ajudar</h2>
+        <p class="texto-central reveal">
             Atuo na abordagem da <strong>Terapia Cognitivo-Comportamental (TCC)</strong>,
             com atendimento online para adultos e adolescentes.
         </p>
         <div class="servicos-lista">
-            <div class="servico-item">
+            <div class="servico-item reveal" style="transition-delay:0.05s">
                 <div class="icone">•</div>
                 <h3>Terapia individual</h3>
                 <p>Sessões online para adultos e adolescentes.</p>
             </div>
-            <div class="servico-item">
+            <div class="servico-item reveal" style="transition-delay:0.15s">
                 <div class="icone">•</div>
                 <h3>Acompanhamento emocional</h3>
                 <p>Ansiedade, depressão, luto e autocuidado.</p>
             </div>
-            <div class="servico-item">
+            <div class="servico-item reveal" style="transition-delay:0.25s">
                 <div class="icone">•</div>
                 <h3>Desenvolvimento pessoal</h3>
                 <p>Autoconhecimento, autoestima e ressignificação.</p>
             </div>
-            <div class="servico-item">
+            <div class="servico-item reveal" style="transition-delay:0.35s">
                 <div class="icone">•</div>
                 <h3>Inclusão e TEA</h3>
                 <p>Suporte para inclusão escolar e social.</p>
@@ -852,16 +878,16 @@
 <!-- ===== RECURSOS ===== -->
 <section id="recursos">
     <div class="container">
-        <h2>Recursos que desenvolvi</h2>
-        <p class="texto-central">
+        <h2 class="reveal">Recursos que desenvolvi</h2>
+        <p class="texto-central reveal">
             Ferramentas e materiais personalizados para tornar a terapia mais dinâmica e acessível.
         </p>
         <div class="recursos-grid">
-            <span class="recurso-tag">Caderno emocional</span>
-            <span class="recurso-tag">Planilhas de autoconhecimento</span>
-            <span class="recurso-tag">Exercícios de respiração</span>
-            <span class="recurso-tag">Diário de pensamentos</span>
-            <span class="recurso-tag">Atividades lúdicas</span>
+            <span class="recurso-tag reveal" style="transition-delay:0.05s">Caderno emocional</span>
+            <span class="recurso-tag reveal" style="transition-delay:0.1s">Planilhas de autoconhecimento</span>
+            <span class="recurso-tag reveal" style="transition-delay:0.15s">Exercícios de respiração</span>
+            <span class="recurso-tag reveal" style="transition-delay:0.2s">Diário de pensamentos</span>
+            <span class="recurso-tag reveal" style="transition-delay:0.25s">Atividades lúdicas</span>
         </div>
     </div>
 </section>
@@ -870,7 +896,7 @@
 <section id="contato">
     <div class="container">
         <div class="contato-grid">
-            <div class="contato-texto">
+            <div class="contato-texto reveal">
                 <h2>Entre em contato</h2>
                 <p class="texto-central">
                     Se você se identificou com a minha forma de trabalhar e com a abordagem que utilizo,
@@ -902,7 +928,7 @@
                 </div>
 
                 <!-- Google Forms -->
-                <div class="form-wrapper">
+                <div class="form-wrapper reveal">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD9GERH22ddtyBqJzsWCdvex12HenHq8RSvgsGfQD0ZYKmFQ/viewform?embedded=true" 
                             width="100%" 
                             height="650" 
@@ -914,7 +940,7 @@
                 </div>
             </div>
             <div class="contato-imagem">
-                <img src="assets/imagens/karol_3.jpg" alt="Karolayne" />
+                <img class="reveal-img" src="assets/imagens/karol_3.jpg" alt="Karolayne" />
             </div>
         </div>
     </div>
@@ -935,6 +961,39 @@
         </p>
     </div>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elementos = document.querySelectorAll('.reveal, .reveal-img');
+
+        if (!('IntersectionObserver' in window)) {
+            elementos.forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entradas) {
+            entradas.forEach(function (entrada) {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.add('reveal-visible');
+                    observer.unobserve(entrada.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+                elementos.forEach(function (el) {
+                    observer.observe(el);
+                });
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

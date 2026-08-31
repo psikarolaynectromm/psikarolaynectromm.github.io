@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Karolayne – Psicóloga Clínica</title>
-    <script>document.documentElement.classList.add('js-enabled');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -35,7 +34,6 @@
             --bg-hero: #e3ecdf;
         }
 
-        /* ===== MODO ESCURO (automático) ===== */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-primary: #1e1813;
@@ -61,11 +59,15 @@
             }
         }
 
-        /* ===== RESET ===== */
+        /* ===== RESET E BASE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -73,9 +75,9 @@
             background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* ===== CONTAINER FULL-WIDTH ===== */
         .container {
             width: 100%;
             padding: 0 5%;
@@ -96,7 +98,7 @@
             flex-wrap: wrap;
             gap: 12px;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -106,24 +108,24 @@
             color: var(--color-green);
             text-decoration: none;
         }
-        
+
         .logo .icone-logo {
             width: 32px;
             height: 32px;
             display: inline-block;
         }
-        
+
         .logo span {
             color: var(--color-brown);
         }
-        
+
         nav {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 8px 20px;
         }
-        
+
         nav a {
             text-decoration: none;
             color: var(--text-primary);
@@ -131,7 +133,7 @@
             font-size: 1rem;
             transition: color 0.2s;
         }
-        
+
         nav a:hover {
             color: var(--color-brown);
         }
@@ -311,7 +313,7 @@
             margin-top: 6px;
         }
 
-        /* ===== FRED (com linhas de chamada) ===== */
+        /* ===== FRED ===== */
         .fred-box {
             margin-top: 40px;
             padding: 20px 24px;
@@ -376,7 +378,6 @@
             margin: 0;
         }
 
-        /* No mobile, volta pro layout empilhado simples */
         @media (max-width: 700px) {
             .fred-visual {
                 min-height: auto;
@@ -467,6 +468,7 @@
             color: var(--color-green);
             font-size: 0.95rem;
             box-shadow: 0 2px 8px var(--shadow-color);
+            display: inline-block;
         }
 
         /* ===== CONTATO ===== */
@@ -554,9 +556,8 @@
             color: var(--color-green);
         }
 
-        /* Botão Instagram (estilo igual aos outros) */
         .btn-instagram {
-            background: #d62976; /* cor oficial do Instagram */
+            background: #d62976;
             color: #fff;
         }
 
@@ -564,7 +565,6 @@
             background: #b81a5f;
         }
 
-        /* ===== GOOGLE FORMS WRAPPER ===== */
         .form-wrapper {
             background: var(--form-bg);
             border-radius: 20px;
@@ -588,7 +588,6 @@
             background: var(--form-bg);
         }
 
-        /* ===== RODAPÉ ===== */
         footer {
             background: var(--bg-footer);
             padding: 36px 5% 28px;
@@ -623,6 +622,12 @@
         footer .links-rodape a {
             margin: 0 12px;
             font-weight: 400;
+        }
+
+        footer .aviso {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
 
         /* ===== RESPONSIVIDADE ===== */
@@ -698,38 +703,49 @@
                 height: 480px;
             }
         }
-        /* ===== ANIMAÇÕES DE ROLAGEM ===== */
-        /* Só escondem o conteúdo se o JavaScript confirmar que está ativo
-           (classe .js-enabled adicionada de forma síncrona no <head>).
-           Sem JS, o conteúdo permanece sempre visível normalmente. */
-        .js-enabled .reveal {
+
+        /* ===== ANIMAÇÕES (SCROLL REVEAL) =====
+           Baseado em IntersectionObserver: mais leve, mais confiável que
+           checagem manual de scroll e não trava a página em nenhum momento.
+           Todos os elementos SEMPRE ficam visíveis por padrão (opacity:1);
+           a classe .reveal-ready (adicionada via JS só depois que o
+           observer está pronto) é que ativa o estado inicial oculto.
+           Assim, se o JS falhar ou for bloqueado, o conteúdo continua
+           visível — nada trava e nada some. */
+        .reveal-ready [class*="fade-"] {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        .js-enabled .reveal.reveal-visible {
+        .reveal-ready .fade-up {
+            transform: translateY(30px);
+        }
+        .reveal-ready .fade-down {
+            transform: translateY(-30px);
+        }
+        .reveal-ready .fade-left {
+            transform: translateX(30px);
+        }
+        .reveal-ready .fade-right {
+            transform: translateX(-30px);
+        }
+        .reveal-ready .fade-scale {
+            transform: scale(0.92);
+        }
+
+        .reveal-ready [class*="fade-"].reveal-visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate(0, 0) scale(1);
         }
 
-        .js-enabled .reveal-img {
-            opacity: 0;
-            transform: scale(0.94);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .js-enabled .reveal-img.reveal-visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
+        /* Reduzir movimento para quem tem essa preferência no sistema */
         @media (prefers-reduced-motion: reduce) {
-            .js-enabled .reveal,
-            .js-enabled .reveal-img {
-                opacity: 1;
-                transform: none;
-                transition: none;
+            .reveal-ready [class*="fade-"] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
             }
         }
     </style>
@@ -755,19 +771,19 @@
     <div class="container">
         <div class="hero-grid">
             <div class="hero-imagem">
-                <img class="reveal-img" src="assets/imagens/karol_1.jpg" alt="Karolayne" />
+                <img class="fade-scale" src="assets/imagens/karol_1.jpg" alt="Karolayne" />
             </div>
             <div class="hero-texto">
-                <h1 class="reveal" style="transition-delay:0.1s">Olá, sou <strong>Karolayne</strong></h1>
-                <p class="subtitulo reveal" style="transition-delay:0.2s">Psicóloga clínica · CRP 12/28342</p>
-                <p class="frase-destaque reveal" style="transition-delay:0.3s">
-                    “Às vezes, tudo começa quando você se permite olhar para dentro.”
+                <h1 class="fade-up" style="transition-delay:0.1s">Olá, sou <strong>Karolayne</strong></h1>
+                <p class="subtitulo fade-up" style="transition-delay:0.2s">Psicóloga clínica · CRP 12/28342</p>
+                <p class="frase-destaque fade-up" style="transition-delay:0.3s">
+                    "Às vezes, tudo começa quando você se permite olhar para dentro."
                 </p>
-                <p class="reveal" style="transition-delay:0.4s">
+                <p class="fade-up" style="transition-delay:0.4s">
                     Entre o que você vive hoje e o que deseja viver, existe um caminho.<br />
                     Podemos construí-lo juntos.
                 </p>
-                <a href="#contato" class="btn reveal" style="transition-delay:0.5s">Vamos conversar?</a>
+                <a href="#contato" class="btn fade-up" style="transition-delay:0.5s">Vamos conversar?</a>
             </div>
         </div>
     </div>
@@ -776,9 +792,9 @@
 <!-- ===== SOBRE ===== -->
 <section id="sobre">
     <div class="container">
-        <h2 class="reveal">Sobre a Karol</h2>
+        <h2 class="fade-down">Sobre a Karol</h2>
         <div class="sobre-grid">
-            <div class="texto reveal">
+            <div class="texto fade-right">
                 <p>
                     <strong>Que bom ter você por aqui!</strong> Deixe eu me apresentar: meu nome é
                     <strong>Karolayne</strong>, sou psicóloga clínica, inscrita no CRP 12/28342,
@@ -803,19 +819,17 @@
                 </p>
                 <span class="crp">CRP 12/28342</span>
             </div>
-            <div class="foto">
-                <img class="reveal-img" src="assets/imagens/karol_2.jpg" alt="Karolayne" />
+            <div class="foto fade-left">
+                <img src="assets/imagens/karol_2.jpg" alt="Karolayne" />
             </div>
         </div>
 
-        <!-- Fred (com linhas de chamada) -->
-        <div class="fred-box reveal">
+        <!-- Fred -->
+        <div class="fred-box fade-up">
             <div class="fred-visual">
                 <svg class="fred-arrow-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Linha fina esquerda: do texto até o topo-esquerda do círculo -->
                     <path d="M 260 90 C 320 90, 340 130, 355 170"
                           stroke="var(--color-brown)" stroke-width="1" fill="none" opacity="0.5" />
-                    <!-- Linha fina direita: do fundo-direita do círculo até o texto -->
                     <path d="M 545 250 C 580 280, 610 270, 640 260"
                           stroke="var(--color-brown)" stroke-width="1" fill="none" opacity="0.5" />
                 </svg>
@@ -824,14 +838,14 @@
                     <img src="assets/imagens/fred_1.jpg" alt="Fred, o salsicha" />
                 </div>
 
-                <div class="fred-texto-esquerda">
+                <div class="fred-texto-esquerda fade-right">
                     <p>
                         Atuo na abordagem da <strong>Terapia Cognitivo-Comportamental (TCC)</strong>,
                         com atendimento online para adultos e adolescentes.
                     </p>
                 </div>
 
-                <div class="fred-texto-direita">
+                <div class="fred-texto-direita fade-left">
                     <p>
                         <strong>Ah, e antes que eu me esqueça, este é o Fred:</strong> um salsicha muito
                         brincalhão que está sempre por perto enquanto realizo os atendimentos.
@@ -845,28 +859,28 @@
 <!-- ===== SERVIÇOS ===== -->
 <section id="servicos">
     <div class="container">
-        <h2 class="reveal">Como posso ajudar</h2>
-        <p class="texto-central reveal">
+        <h2 class="fade-up">Como posso ajudar</h2>
+        <p class="texto-central fade-up">
             Atuo na abordagem da <strong>Terapia Cognitivo-Comportamental (TCC)</strong>,
             com atendimento online para adultos e adolescentes.
         </p>
         <div class="servicos-lista">
-            <div class="servico-item reveal" style="transition-delay:0.05s">
+            <div class="servico-item fade-up" style="transition-delay:0.05s">
                 <div class="icone">•</div>
                 <h3>Terapia individual</h3>
                 <p>Sessões online para adultos e adolescentes.</p>
             </div>
-            <div class="servico-item reveal" style="transition-delay:0.15s">
+            <div class="servico-item fade-up" style="transition-delay:0.15s">
                 <div class="icone">•</div>
                 <h3>Acompanhamento emocional</h3>
                 <p>Ansiedade, depressão, luto e autocuidado.</p>
             </div>
-            <div class="servico-item reveal" style="transition-delay:0.25s">
+            <div class="servico-item fade-up" style="transition-delay:0.25s">
                 <div class="icone">•</div>
                 <h3>Desenvolvimento pessoal</h3>
                 <p>Autoconhecimento, autoestima e ressignificação.</p>
             </div>
-            <div class="servico-item reveal" style="transition-delay:0.35s">
+            <div class="servico-item fade-up" style="transition-delay:0.35s">
                 <div class="icone">•</div>
                 <h3>Inclusão e TEA</h3>
                 <p>Suporte para inclusão escolar e social.</p>
@@ -878,16 +892,16 @@
 <!-- ===== RECURSOS ===== -->
 <section id="recursos">
     <div class="container">
-        <h2 class="reveal">Recursos que desenvolvi</h2>
-        <p class="texto-central reveal">
+        <h2 class="fade-down">Recursos que desenvolvi</h2>
+        <p class="texto-central fade-up">
             Ferramentas e materiais personalizados para tornar a terapia mais dinâmica e acessível.
         </p>
         <div class="recursos-grid">
-            <span class="recurso-tag reveal" style="transition-delay:0.05s">Caderno emocional</span>
-            <span class="recurso-tag reveal" style="transition-delay:0.1s">Planilhas de autoconhecimento</span>
-            <span class="recurso-tag reveal" style="transition-delay:0.15s">Exercícios de respiração</span>
-            <span class="recurso-tag reveal" style="transition-delay:0.2s">Diário de pensamentos</span>
-            <span class="recurso-tag reveal" style="transition-delay:0.25s">Atividades lúdicas</span>
+            <span class="recurso-tag fade-scale" style="transition-delay:0.05s">Caderno emocional</span>
+            <span class="recurso-tag fade-scale" style="transition-delay:0.1s">Planilhas de autoconhecimento</span>
+            <span class="recurso-tag fade-scale" style="transition-delay:0.15s">Exercícios de respiração</span>
+            <span class="recurso-tag fade-scale" style="transition-delay:0.2s">Diário de pensamentos</span>
+            <span class="recurso-tag fade-scale" style="transition-delay:0.25s">Atividades lúdicas</span>
         </div>
     </div>
 </section>
@@ -896,7 +910,7 @@
 <section id="contato">
     <div class="container">
         <div class="contato-grid">
-            <div class="contato-texto reveal">
+            <div class="contato-texto fade-right">
                 <h2>Entre em contato</h2>
                 <p class="texto-central">
                     Se você se identificou com a minha forma de trabalhar e com a abordagem que utilizo,
@@ -904,43 +918,43 @@
                 </p>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 10px;">
-                    <a href="https://wa.me/5547988732736" target="_blank" class="btn btn-verde">
+                    <a href="https://wa.me/5547988732736" target="_blank" class="btn btn-verde fade-up" style="transition-delay:0.1s">
                         Agendar pelo WhatsApp
                     </a>
-                    <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank" class="btn btn-instagram">
+                    <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank" class="btn btn-instagram fade-up" style="transition-delay:0.2s">
                         Instagram
                     </a>
                 </div>
 
                 <div class="contato-info">
-                    <div>
+                    <div class="fade-up" style="transition-delay:0.1s">
                         <span class="label">E-mail</span>
                         <a href="mailto:psikarolaynectromm@gmail.com">psikarolaynectromm@gmail.com</a>
                     </div>
-                    <div>
+                    <div class="fade-up" style="transition-delay:0.2s">
                         <span class="label">Telefone</span>
                         <a href="tel:+5547988732736">(47) 98873-2736</a>
                     </div>
                 </div>
 
-                <div class="horario">
+                <div class="horario fade-up" style="transition-delay:0.3s">
                     Segunda a sexta — das 8h às 18h
                 </div>
 
-                <!-- Google Forms -->
-                <div class="form-wrapper reveal">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD9GERH22ddtyBqJzsWCdvex12HenHq8RSvgsGfQD0ZYKmFQ/viewform?embedded=true" 
-                            width="100%" 
-                            height="650" 
-                            frameborder="0" 
-                            marginheight="0" 
-                            marginwidth="0">
+                <div class="form-wrapper fade-up" style="transition-delay:0.4s">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD9GERH22ddtyBqJzsWCdvex12HenHq8RSvgsGfQD0ZYKmFQ/viewform?embedded=true"
+                            width="100%"
+                            height="650"
+                            frameborder="0"
+                            marginheight="0"
+                            marginwidth="0"
+                            loading="lazy">
                         Carregando…
                     </iframe>
                 </div>
             </div>
-            <div class="contato-imagem">
-                <img class="reveal-img" src="assets/imagens/karol_3.jpg" alt="Karolayne" />
+            <div class="contato-imagem fade-left">
+                <img src="assets/imagens/karol_3.jpg" alt="Karolayne" />
             </div>
         </div>
     </div>
@@ -949,46 +963,70 @@
 <!-- ===== RODAPÉ ===== -->
 <footer>
     <div class="container" style="padding:0;">
-        <p>
+        <p class="fade-up">
             <img src="assets/imagens/icon2.png" alt="Ícone" class="icone-rodape" />
             &copy; 2026 Karolayne – Psicóloga Clínica | CRP 12/28342
         </p>
-        <p class="links-rodape">
+        <p class="links-rodape fade-up" style="transition-delay:0.1s">
             <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank">Instagram</a>
         </p>
-        <p style="margin-top: 14px; font-size: 0.8rem; color: var(--text-light);">
+        <p class="aviso fade-up" style="transition-delay:0.2s">
             Este site não substitui uma consulta presencial. Em caso de emergência, procure o CVV (188) ou um serviço de urgência.
         </p>
     </div>
 </footer>
 
+<!-- ===== SCRIPT DE ANIMAÇÃO (IntersectionObserver) ===== -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var elementos = document.querySelectorAll('.reveal, .reveal-img');
+        var elementos = document.querySelectorAll('[class*="fade-"]');
 
-        if (!('IntersectionObserver' in window)) {
-            elementos.forEach(function (el) {
-                el.classList.add('reveal-visible');
-            });
+        // Só ativa o estado "oculto antes de aparecer" depois que o JS
+        // confirmou que está rodando e que o observer foi criado.
+        // Se o navegador não suportar IntersectionObserver, o conteúdo
+        // simplesmente permanece visível (nada trava, nada some).
+        if (!('IntersectionObserver' in window) || elementos.length === 0) {
             return;
         }
 
-        var observer = new IntersectionObserver(function (entradas) {
-            entradas.forEach(function (entrada) {
-                if (entrada.isIntersecting) {
-                    entrada.target.classList.add('reveal-visible');
-                } else {
-                    entrada.target.classList.remove('reveal-visible');
+        document.documentElement.classList.add('reveal-ready');
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -10% 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
         });
 
         elementos.forEach(function (el) {
             observer.observe(el);
         });
+
+        // Revela imediatamente o que já está visível na primeira carga
+        // (o observer às vezes não dispara a tempo no load inicial).
+        setTimeout(function () {
+            elementos.forEach(function (el) {
+                if (el.classList.contains('reveal-visible')) return;
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+                    el.classList.add('reveal-visible');
+                    observer.unobserve(el);
+                }
+            });
+        }, 150);
+
+        // Rede de segurança: garante que nada fique invisível para sempre,
+        // mesmo em cenários inesperados (ex.: aba em segundo plano).
+        setTimeout(function () {
+            elementos.forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }, 4000);
     });
 </script>
 

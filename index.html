@@ -705,7 +705,7 @@
         .js-enabled .reveal {
             opacity: 0;
             transform: translateY(28px);
-            transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .js-enabled .reveal.reveal-visible {
@@ -716,7 +716,7 @@
         .js-enabled .reveal-img {
             opacity: 0;
             transform: scale(0.94);
-            transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .js-enabled .reveal-img.reveal-visible {
@@ -977,20 +977,17 @@
             entradas.forEach(function (entrada) {
                 if (entrada.isIntersecting) {
                     entrada.target.classList.add('reveal-visible');
-                    observer.unobserve(entrada.target);
+                } else {
+                    entrada.target.classList.remove('reveal-visible');
                 }
             });
         }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -40px 0px'
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
         });
 
-        window.requestAnimationFrame(function () {
-            window.requestAnimationFrame(function () {
-                elementos.forEach(function (el) {
-                    observer.observe(el);
-                });
-            });
+        elementos.forEach(function (el) {
+            observer.observe(el);
         });
     });
 </script>

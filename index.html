@@ -306,38 +306,103 @@
             margin-top: 6px;
         }
 
-        /* ===== FRED (centralizado, foto acima do texto) ===== */
+        /* ===== FRED (com linhas de chamada) ===== */
         .fred-box {
             background: var(--bg-section);
             border-radius: 20px;
-            padding: 30px 24px;
+            padding: 40px 24px;
             margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
             border-left: 5px solid var(--color-brown);
         }
 
+        .fred-visual {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            min-height: 420px;
+        }
+
+        .fred-arrow-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
         .fred-foto {
-            margin-bottom: 16px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
         }
 
         .fred-foto img {
-            width: 250px;
-            height: 250px;
+            width: 260px;
+            height: 260px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--bg-secondary);
             box-shadow: 0 4px 12px var(--shadow-hover);
         }
 
-        .fred-texto {
-            max-width: 600px;
+        .fred-texto-esquerda,
+        .fred-texto-direita {
+            position: absolute;
+            top: 40px;
+            max-width: 240px;
+            z-index: 2;
         }
 
-        .fred-texto p {
+        .fred-texto-esquerda {
+            left: 0;
+            text-align: right;
+        }
+
+        .fred-texto-direita {
+            right: 0;
+            top: 260px;
+            text-align: left;
+        }
+
+        .fred-texto-esquerda p,
+        .fred-texto-direita p {
             margin: 0;
+        }
+
+        /* No mobile, volta pro layout empilhado simples */
+        @media (max-width: 700px) {
+            .fred-visual {
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .fred-arrow-svg {
+                display: none;
+            }
+            .fred-foto {
+                position: static;
+                transform: none;
+                order: 1;
+            }
+            .fred-texto-esquerda {
+                position: static;
+                max-width: 100%;
+                text-align: center;
+                order: 2;
+            }
+            .fred-texto-direita {
+                position: static;
+                max-width: 100%;
+                text-align: center;
+                order: 3;
+            }
         }
 
         /* ===== SERVIÇOS ===== */
@@ -707,16 +772,45 @@
             </div>
         </div>
 
-        <!-- Fred (centralizado, foto acima) -->
+        <!-- Fred (com linhas de chamada) -->
         <div class="fred-box">
-            <div class="fred-foto">
-                <img src="assets/imagens/fred_1.jpg" alt="Fred, o salsicha" />
-            </div>
-            <div class="fred-texto">
-                <p>
-                    <strong>Ah, e antes que eu me esqueça, este é o Fred:</strong> um salsicha muito
-                    brincalhão que está sempre por perto enquanto realizo os atendimentos.
-                </p>
+            <div class="fred-visual">
+                <svg class="fred-arrow-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="fredArrowLeft" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+                            <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-brown)" />
+                        </marker>
+                        <marker id="fredArrowRight" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+                            <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-brown)" />
+                        </marker>
+                    </defs>
+                    <!-- Seta esquerda: do texto até o topo-esquerda do círculo -->
+                    <path d="M 260 90 C 320 90, 340 130, 355 170"
+                          stroke="var(--color-brown)" stroke-width="2.5" fill="none"
+                          marker-end="url(#fredArrowLeft)" />
+                    <!-- Seta direita: do fundo-direita do círculo até o texto -->
+                    <path d="M 545 250 C 580 280, 610 270, 640 260"
+                          stroke="var(--color-brown)" stroke-width="2.5" fill="none"
+                          marker-end="url(#fredArrowRight)" />
+                </svg>
+
+                <div class="fred-foto">
+                    <img src="assets/imagens/fred_1.jpg" alt="Fred, o salsicha" />
+                </div>
+
+                <div class="fred-texto-esquerda">
+                    <p>
+                        Atuo na abordagem da <strong>Terapia Cognitivo-Comportamental (TCC)</strong>,
+                        com atendimento online para adultos e adolescentes.
+                    </p>
+                </div>
+
+                <div class="fred-texto-direita">
+                    <p>
+                        <strong>Ah, e antes que eu me esqueça, este é o Fred:</strong> um salsicha muito
+                        brincalhão que está sempre por perto enquanto realizo os atendimentos.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

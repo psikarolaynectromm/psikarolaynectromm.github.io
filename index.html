@@ -660,6 +660,61 @@
             color: var(--text-light);
         }
 
+        /* ===== BANNER DE PRIVACIDADE (LGPD) ===== */
+        .banner-privacidade {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 600px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 16px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-size: 0.88rem;
+        }
+
+        .banner-privacidade a {
+            color: var(--color-green);
+            text-decoration: underline;
+        }
+
+        .btn-aceitar-privacidade {
+            background: var(--color-green);
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .btn-aceitar-privacidade:hover {
+            background: var(--color-green-hover);
+        }
+
+        @media (max-width: 600px) {
+            .banner-privacidade {
+                flex-direction: column;
+                align-items: flex-start;
+                bottom: 12px;
+                left: 12px;
+                right: 12px;
+            }
+            .btn-aceitar-privacidade {
+                align-self: flex-end;
+            }
+        }
+
         /* ===== NOVAS SEÇÕES E ACESSIBILIDADE ===== */
         :focus-visible {
             outline: 3px solid var(--color-brown);
@@ -1154,6 +1209,15 @@
 </section>
 </main>
 
+<!-- ===== BANNER LGPD ===== -->
+<div id="banner-privacidade" class="banner-privacidade" style="display: none;">
+    <p>
+        Este site utiliza cookies essenciais e coleta dados de contato apenas para agendamento.
+        Conheça nosso <a href="privacidade.html" target="_blank">Aviso de Privacidade</a>.
+    </p>
+    <button id="btn-aceitar-privacidade" class="btn-aceitar-privacidade">Entendi</button>
+</div>
+
 <!-- ===== RODAPÉ ===== -->
 <footer>
     <div class="container" style="padding:0;">
@@ -1162,7 +1226,8 @@
             &copy; <span id="ano-atual">2026</span> Karolayne – Psicóloga Clínica | CRP 12/28342
         </p>
         <p class="links-rodape fade-up" style="transition-delay:0.1s">
-            <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank">Instagram</a>
+            <a href="https://www.instagram.com/psi_karolaynechagastromm/" target="_blank">Instagram</a> |
+            <a href="privacidade.html">Aviso de Privacidade</a>
         </p>
         <p class="aviso fade-up" style="transition-delay:0.2s">
             Este site não substitui atendimento psicológico ou serviço de urgência. Em situação de risco imediato, procure um serviço de emergência. O CVV (188) oferece apoio emocional e prevenção do suicídio.
@@ -1170,11 +1235,24 @@
     </div>
 </footer>
 
-<!-- ===== SCRIPT DE ANIMAÇÃO (IntersectionObserver) ===== -->
+<!-- ===== SCRIPT DE ANIMAÇÃO ===== -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var ano = document.getElementById('ano-atual');
         if (ano) ano.textContent = new Date().getFullYear();
+
+        // Lógica do Banner LGPD
+        var banner = document.getElementById('banner-privacidade');
+        var btnAceitar = document.getElementById('btn-aceitar-privacidade');
+
+        if (!localStorage.getItem('privacidade_aceita')) {
+            banner.style.display = 'flex';
+        }
+
+        btnAceitar.addEventListener('click', function () {
+            localStorage.setItem('privacidade_aceita', 'true');
+            banner.style.display = 'none';
+        });
 
         var elementos = document.querySelectorAll('[class*="fade-"]');
 
@@ -1219,7 +1297,7 @@
     });
 </script>
 
-<!-- Integração do formulário Tally -->
+<!-- Integração Tally -->
 <script>
     (function () {
         var d = document;
@@ -1245,7 +1323,7 @@
     })();
 </script>
 
-<!-- ===== BOTÃO FLUTUANTE DO WHATSAPP ===== -->
+<!-- ===== BOTÃO FLUTUANTE WHATSAPP ===== -->
 <a class="whatsapp-flutuante"
    href="https://wa.me/5547988732736?text=Ol%C3%A1%2C%20Karolayne!%20Encontrei%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento."
    target="_blank"
